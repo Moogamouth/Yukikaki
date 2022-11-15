@@ -7,7 +7,7 @@ const arweave = await require("arweave").init({
 });
   
 const page = await (await require("puppeteer").launch()).newPage();
-  
+
 async function archive(options) {
 	hrefs = true;
 	if (options.i === undefined) {
