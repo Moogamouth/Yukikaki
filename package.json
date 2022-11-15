@@ -1,7 +1,7 @@
 {
   "name": "permaloom",
   "version": "0.1.0",
-  "description": "Node.js package to archive websites to arweave.",
+  "description": "Node.js package to archive webpages to Arweave from URLs.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
