@@ -1,18 +1,18 @@
 # Permaloom
-Node.js package to archive webpages, links, and sources to arweave from urls.
+Node.js package to archive webpages, links, and sources to Arweave from URLs.
 
 # Usage
 
 ## .archive([options])
-Archives a webpage and its sources to arweave from options.url.
+Archives a webpage and its sources to Arweave from options.url.
 
 ### options.url
 `String`
-Url to archive.
+URL to archive.
 
 ### options.key
 `Object`
-Arweave key object of an arweave wallet.
+Arweave key object of an Arweave wallet.
 
 ### options.hrefs
 `Bool`
