@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Moogamouth/Permaloom/issues"
   },
-  "homepage": "https://github.com/Moogamouth/Permaloom#readme"
+  "homepage": "https://github.com/Moogamouth/Permaloom#readme",
+  "dependencies": {
+    "puppeteer": "^19.2.2"
+  }
 }
