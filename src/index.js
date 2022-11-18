@@ -44,8 +44,12 @@ class Permaloom {
 				*/
 			}
 			
+<<<<<<< HEAD
 			for (let j of (await this.page.evaluate("performance.getEntriesByType(\"resource\").map(a => a.toJSON())")).map(({name}) => name)) {await this.main({url: j, key: options.key, i: options.i - 1, hrefs: options.hrefs, after: options.after});}
 			//options.html === undefined??? Why is this?
+=======
+			for (let j of (await this.page.evaluate("performance.getEntriesByType(\"resource\").map(a => a.toJSON())")).map(({name}) => name)) {await this.archive({"url": j, "key": options.key, "i": options.i - 1, "hrefs": options.hrefs, "after": options.after});}
+>>>>>>> 53f0a974f138e28077887495eddfb9c36c025d11
 			if (options.hrefs && options.html) {
 				for (let j of await this.page.$$eval("a", as => as.map(a => a.href))) {await this.main({url: j, key: options.key, i: options.i - 1, hrefs: options.hrefs, after: options.after, html: true});}
 			}
