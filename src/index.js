@@ -42,8 +42,7 @@ class Permaloom {
 				*/
 			}
 			
-			//evaluate("performance.getEntriesByType(\"resource\");") giving wrong response
-			for (let j of (await this.page.evaluate("performance.getEntriesByType(\"resource\");")).map(({name}) => name)) {await this.archive({"url": j, "key": options.key, "i": options.i - 1, "hrefs": options.hrefs, "after": options.after});}
+			for (let j of (await this.page.evaluate("performance.getEntriesByType(\"resource\").map(a => a.toJSON())")).map(({name}) => name)) {await this.archive({"url": j, "key": options.key, "i": options.i - 1, "hrefs": options.hrefs, "after": options.after});}
 			if (options.hrefs && options.html) {
 				for (let j of await this.page.$$eval("a", as => as.map(a => a.href))) {await this.archive({"url": j, "key": options.key, "i": options.i - 1, "hrefs": options.hrefs, "after": options.after, "html": true});}
 			}
