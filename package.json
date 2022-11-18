@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Moogamouth/Permaloom#readme",
   "dependencies": {
+    "arweave": "^1.11.6",
     "puppeteer": "^19.2.2"
   }
 }
