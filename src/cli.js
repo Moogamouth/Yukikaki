@@ -2,16 +2,19 @@ const permaloom = await new (await require("./index.js"));
 
 const cli = require("meow")(`
 Usage
-$ archive <input>
+$ archive <url>
 
 Options
---url, -u  
+--url, -u
+--i, -i
+--hrefs, -h
+--after, -a
 
 Examples
 `, {
     flags: {
         key: {type: string, alias: "k"},
-        i: {type: number, alias: "i", default: 2},
+        i: {type: number, alias: "i", default: 1},
         hrefs: {type: boolean, alias: "h"},
         after: {type: number, alias: "a"}
     }

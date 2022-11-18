@@ -13,15 +13,24 @@ class Permaloom {
 		})
 	}
 
+	sleep(milliseconds) {
+		const date = Date.now();
+		let currentDate = null;
+		do {
+		  currentDate = Date.now();
+		} while (currentDate - date < milliseconds);
+	}
+
 	async main(options) {
 
-		if (options.i === undefined) options.i = 2;
+		if (options.i === undefined) options.i = 1;
 
-		if (options.i > 2) options.hrefs = true;
+		if (options.i > 1) options.hrefs = true;
 	
 		if (options.i > 0) {
 
-			const res = await this.page.goto(`${options.url}`);
+			const res = await this.page.goto(options.url);
+			//why is res null on second iteration of this function?
 			let contentType = res.headers()["content-type"];
 			if (contentType.includes(";")) contentType = contentType.split(";")[0];
 
@@ -44,15 +53,8 @@ class Permaloom {
 				*/
 			}
 			
-<<<<<<< HEAD
+			if (options.hrefs && options.html) for (let j of (await this.page.$$eval("a", as => as.map(a => a.href))).filter(el => {return el !== "";})) {await this.main({url: j, key: options.key, i: options.i - 1, hrefs: options.hrefs, after: options.after, html: true});}
 			for (let j of (await this.page.evaluate("performance.getEntriesByType(\"resource\").map(a => a.toJSON())")).map(({name}) => name)) {await this.main({url: j, key: options.key, i: options.i - 1, hrefs: options.hrefs, after: options.after});}
-			//options.html === undefined??? Why is this?
-=======
-			for (let j of (await this.page.evaluate("performance.getEntriesByType(\"resource\").map(a => a.toJSON())")).map(({name}) => name)) {await this.archive({"url": j, "key": options.key, "i": options.i - 1, "hrefs": options.hrefs, "after": options.after});}
->>>>>>> 53f0a974f138e28077887495eddfb9c36c025d11
-			if (options.hrefs && options.html) {
-				for (let j of await this.page.$$eval("a", as => as.map(a => a.href))) {await this.main({url: j, key: options.key, i: options.i - 1, hrefs: options.hrefs, after: options.after, html: true});}
-			}
 
 		}
 
