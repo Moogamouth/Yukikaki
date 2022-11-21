@@ -13,14 +13,6 @@ class Permaloom {
 		})
 	}
 
-	sleep(milliseconds) {
-		const date = Date.now();
-		let currentDate = null;
-		do {
-		  currentDate = Date.now();
-		} while (currentDate - date < milliseconds);
-	}
-
 	async main(options) {
 
 		if (options.i === undefined) options.i = 1;
@@ -30,7 +22,7 @@ class Permaloom {
 		if (options.i > 0) {
 
 			const res = await this.page.goto(options.url);
-			//why is res null on second iteration of this function?
+
 			let contentType = res.headers()["content-type"];
 			if (contentType.includes(";")) contentType = contentType.split(";")[0];
 
