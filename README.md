@@ -33,4 +33,4 @@ Optional. If true, archive links, links of links, and links of links of links, s
 
 ### options.after
 `Int`
-Optional. A Unix date. Only archive sites that have not been archived after this date.
+Optional. A Unix date. Only archive pages that have not been archived after this date.
