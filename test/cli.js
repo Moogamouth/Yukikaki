@@ -18,7 +18,7 @@
     $ archive https://en.wikipedia.org/wiki/The_Scorpion_and_the_Frog <key> -i 1 -h true -a 1588230344423
     `, {
         flags: {
-            i: {type: "number", alias: "i", default: 1},
+            i: {type: "number", alias: "i"},
             hrefs: {type: "boolean", alias: "h"},
             after: {type: "number", alias: "a"}
         }

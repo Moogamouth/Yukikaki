@@ -21,7 +21,8 @@ class Permaloom {
 	
 		if (options.i > 0) {
 
-			const res = await this.page.goto(options.url);
+			let res = null;
+			while (!res) res = await this.page.goto(options.url);
 
 			let contentType = res.headers()["content-type"];
 			if (contentType.includes(";")) contentType = contentType.split(";")[0];
