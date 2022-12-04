@@ -1,3 +1,6 @@
+//disable downloads
+//distance search for graphql queries
+
 class Permaloom {
 
 	constructor() {
@@ -19,16 +22,13 @@ class Permaloom {
 
 		if (options.i > 1) options.hrefs = true;
 
-		if (options.retries === undefined) options.retries = 3;
+		let urls = [];
+		this.page.on("request", async (req) => {urls.push(req.url());});
 
 		let res = null;
-		for (let i = 0; i < 3; i++) {
-			//abort this await if timeout
-			res = await this.page.goto(options.url);
-			if (res) break;
-			if (i > options.retries - 1) return;
-		}
-
+		try {res = await this.page.goto(options.url);}catch{return;}
+		if (res.status() !== 200) return;
+		
 		//what to do about no mime type?
 		let contentType = res.headers()["content-type"];
 		//get rid of this line?
@@ -55,7 +55,8 @@ class Permaloom {
 		
 		if (options.i > 0) {
 			if (options.hrefs && options.html) for (let i of (await this.page.$$eval("a", as => as.map(a => a.href))).filter(el => {return el !== "";})) {await this.main({url: i, key: options.key, i: options.i - 1, hrefs: options.hrefs, after: options.after, html: true});}
-			for (let i of (await this.page.evaluate("performance.getEntriesByType(\"resource\").map(a => a.toJSON())")).map(({name}) => name)) {await this.main({url: i, key: options.key, i: options.i - 1, hrefs: options.hrefs, after: options.after});}
+			console.log(urls);
+			for (let i = 1; i < urls.length; i++) {await this.main({url: urls[i], key: options.key, i: options.i - 1, hrefs: options.hrefs, after: options.after});}
 		}
 
 	}

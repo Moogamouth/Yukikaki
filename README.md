@@ -6,7 +6,7 @@ Node.js package to archive webpages, links, and sources to Arweave from URLs.
 ```js
 (async () => {
     const permaloom = await new (await require("permaloom"));
-    await permaloom.archive({url: "https://en.wikipedia.org/wiki/The_Scorpion_and_the_Frog", key: <key>, i: 1, hrefs: true, after: 1588230344423});
+    await permaloom.archive({url: "https://www.youtube.com/watch?v=jNQXAC9IVRw", key: <key>, i: 1, hrefs: true, after: 1588230344423});
 })();
 ```
 
