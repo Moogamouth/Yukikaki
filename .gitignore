@@ -44,9 +44,6 @@ jspm_packages/
 # TypeScript v1 declaration files
 typings/
 
-# Puppeteer config directory
-config/
-
 # TypeScript cache
 *.tsbuildinfo
 
@@ -105,3 +102,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Puppeteer config directory
+config/
