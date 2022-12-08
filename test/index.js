@@ -1,4 +1,3 @@
-//disable downloads
 //distance search for graphql queries
 
 class Permaloom {
@@ -6,7 +5,11 @@ class Permaloom {
 	constructor() {
 		return Promise.resolve()
 		.then(async () => {
-			this.page = (await (await require("puppeteer").launch({headless: false})).pages())[0];
+			this.page = (await (await require("puppeteer").launch({headless: false})).pages())[0]
+			this.page.setViewport({
+				width: 1200,
+				height: 800
+			});
 			this.arweave = await require("arweave").init({
 				host: "arweave.net",
 				port: 443,
@@ -17,7 +20,6 @@ class Permaloom {
 	}
 
 	async main(options) {
-
 		if (options.i === undefined) options.i = 1;
 
 		if (options.i > 1) options.hrefs = true;
@@ -36,11 +38,7 @@ class Permaloom {
 
 		if (!options.html && contentType === "text/html") options.html = true;
 		
-		if (options.html) {
-			const maxX = await this.page.evaluate("Math.max(document.body.scrollWidth, document.body.offsetWidth, document.documentElement.clientWidth, document.documentElement.scrollWidth, document.documentElement.offsetWidth) - window.innerWidth;");
-			const maxY = await this.page.evaluate("Math.max(document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight) - window.innerHeight;");
-			while (await this.page.evaluate("window.scrollX;") < maxX || await this.page.evaluate("window.scrollY") < maxY) await this.page.evaluate(`window.scrollTo(${maxX}, ${maxY});`);
-		}
+		if (options.html) await this.page.evaluate(async () => {window.scrollBy(document.body.scrollWidth - window.innerWidth, document.body.scrollHeight - window.innerHeight);});
 
 		const transactions = (await this.arweave.api.post("/graphql", {query: `query{transactions(sort:HEIGHT_DESC,tags:{name:"page:url",values:["${options.url}"]}){edges{node{tags{value}}}}}`})).data.data.transactions.edges[0];
 		if (!options.after || !transactions || transactions.node.tags[4].value < options.after) {
@@ -55,7 +53,6 @@ class Permaloom {
 		
 		if (options.i > 0) {
 			if (options.hrefs && options.html) for (let i of (await this.page.$$eval("a", as => as.map(a => a.href))).filter(el => {return el !== "";})) {await this.main({url: i, key: options.key, i: options.i - 1, hrefs: options.hrefs, after: options.after, html: true});}
-			console.log(urls);
 			for (let i = 1; i < urls.length; i++) {await this.main({url: urls[i], key: options.key, i: options.i - 1, hrefs: options.hrefs, after: options.after});}
 		}
 

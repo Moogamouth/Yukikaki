@@ -15,7 +15,7 @@
     --after, -a
 
     Examples
-    $ archive https://en.wikipedia.org/wiki/The_Scorpion_and_the_Frog <key> -i 1 -h true -a 1588230344423
+    $ archive https://www.youtube.com/watch?v=jNQXAC9IVRw <key> -i 1 -h true -a 1588230344423 
     `, {
         flags: {
             i: {type: "number", alias: "i"},
