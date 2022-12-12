@@ -1,4 +1,4 @@
-//distance search for graphql queries
+//add distance search for graphql queries
 
 class Permaloom {
 
