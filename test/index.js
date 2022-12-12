@@ -28,9 +28,7 @@ class Permaloom {
 		try {res = await this.page.goto(options.url);}catch{return;}
 		if (res.status() !== 200) return;
 		
-		//what to do about an absent mime type?
 		let contentType = res.headers()["content-type"];
-		//get rid of this line?
 		if (contentType.includes(";")) contentType = contentType.split(";")[0];
 
 		if (!options.html && contentType === "text/html") options.html = true;
@@ -61,7 +59,6 @@ class Permaloom {
 
 	}
 
-	//make this function untitled
 	async archive(options) {
 		await this.main(options);
 		await this.page.close();
