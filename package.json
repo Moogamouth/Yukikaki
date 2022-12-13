@@ -1,23 +1,22 @@
 {
-  "name": "permaloom",
+  "name": "yukikaki",
   "version": "0.1.0",
-  "description": "Node.js package to archive webpages to Arweave from URLs.",
-  "main": "index.js",
+  "description": "Node.js API that scrapes and crawls webpages.",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Moogamouth/Permaloom.git"
+    "url": "git+https://github.com/Moogamouth/Yukikaki.git"
   },
   "author": "Moogamouth",
   "license": "AGPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/Moogamouth/Permaloom/issues"
+    "url": "https://github.com/Moogamouth/Yukikaki/issues"
   },
-  "homepage": "https://github.com/Moogamouth/Permaloom#readme",
+  "homepage": "https://github.com/Moogamouth/Yukikaki#readme",
   "dependencies": {
-    "arweave": "^1.11.6",
     "puppeteer": "^19.2.2"
   }
 }
