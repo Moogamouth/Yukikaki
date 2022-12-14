@@ -13,18 +13,13 @@ class Yukikaki {
 		})
 	}
 
-	async main(options) {
+	async main(options) { 
 		if (options.i === undefined) options.i = 1;
 		if (options.i > 1) options.hrefs = true;
 
 		let res = null;
 		try {res = await this.page.goto(options.url);}catch{return;}
 		if (res.status() !== 200) return;
-		
-		if (arcLinksAndSrcs) {
-			var urls = [];
-			this.page.on("request", async (req) => {urls.push(req.url());});
-		}
 
 		data = [];
 
@@ -36,6 +31,11 @@ class Yukikaki {
 		if (!options.html && contentType === "text/html") options.html = true;
 
 		var arcLinksAndSrcs = options.hrefs == true && options.html == true && options.i > 0;
+
+		if (arcLinksAndSrcs) {
+			var urls = [];
+			this.page.on("request", async (req) => {urls.push(req.url());});
+		}
 		
 		if (options.html) await this.page.evaluate(async () => {window.scrollBy(document.body.scrollWidth - window.innerWidth, document.body.scrollHeight - window.innerHeight);});
 		

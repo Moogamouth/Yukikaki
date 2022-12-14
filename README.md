@@ -45,6 +45,9 @@ The data that has been scraped from the current page.
 ###### options
 The options object passed into .scrape().
 
+#####
+Tip: You can set options.i to 0 to disable scraping for sources and links of the page currently being crawled.
+
 ##### options.i
 `Int`
 Optional. Default is 1. Determines when to stop archiving links and sources. If i > 1, options.hrefs will automatically be set to true.
