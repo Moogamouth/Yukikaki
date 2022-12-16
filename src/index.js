@@ -15,7 +15,7 @@ class Yukikaki {
 	}
 
 	async main(options) {
-		if (options.i === undefined) options.i = 1;
+		options.i = options.i ?? 1;
 		
 		if (options.i > 1) options.hrefs = true;
 
@@ -25,7 +25,7 @@ class Yukikaki {
 		let contentType = res.headers()["content-type"];
 		if (contentType.includes(";")) contentType = contentType.split(";")[0];
 
-		if (!options.html && contentType === "text/html") options.html = true;
+		if (contentType === "text/html") options.html = options.html ?? true;
 
 		let data = [];
 		const ret = await options.func(options, res, this.page);
