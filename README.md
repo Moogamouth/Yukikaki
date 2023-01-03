@@ -77,12 +77,17 @@ Optional. Default is 1. Determines when to stop archiving trees of links and sou
 #### options.hrefs
 `Bool`
 
-Optional. If true, archive links, links of links, so on, stemming from the current page. It will stop when options.i is depleted. Will automatically be set to true if `options.i` > 1.
+Optional. If true, scrape links, links of links, so on, stemming from the current page. It will stop when options.i is depleted. Will automatically be set to true if `options.i` > 1.
 
 #### options.srcs
 `Bool`
 
-Optional. If true, archive sources of the current page.
+Optional. If true, scrape sources of the current page.
+
+#### options.robots
+`Bool`
+
+Optional. If true, only scrape pages in accordance with robots.txt.
 
 ## License
 
