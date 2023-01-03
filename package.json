@@ -1,6 +1,6 @@
 {
   "name": "yukikaki",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Node.js API that scrapes and crawls webpages.",
   "main": "src/index.js",
   "scripts": {

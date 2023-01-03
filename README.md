@@ -25,20 +25,23 @@ Or with `import`:
 })();
 ```
 
-You can start Yukikaki in headful mode using the `headless` parameter like so:
-```js
-(async () => {
-    const yukikaki = new require("yukikaki")(false);
-})();
-```
+### Class parameters
 
-Or using `import`:
-```js
-(async () => {
-    import Yukikaki from "yukikaki";
-    const yukikaki = new Yukikaki(false);
-})();
-```
+#### options.headless
+`Bool`
+
+Optional. Default is true. If false, starts crawling in headful mode.
+
+#### options.userAgent
+`String`
+
+Optional. Sets the user agent for robots.txt.
+
+#### options.robotsNeutral
+
+`Bool`
+
+Optional. Default is true. Determines whether to crawl pages that are neutral according to robots.txt.
 
 ### .scrape(options)
 Scrapes data from webpages according to `options`.

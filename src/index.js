@@ -1,15 +1,18 @@
 class Yukikaki {
 
-	constructor(headless) {
+	constructor(options) {
 		return Promise.resolve()
 		.then(async () => {
-			this.browser = await (require("puppeteer")).launch({headless: headless});
+			this.browser = await (require("puppeteer")).launch({headless: options.headless});
 			this.page = (await this.browser.pages())[0];
 			this.page.setViewport({
 				width: 1200,
 				height: 800
 			});
 			this.robots = require("robots-txt-parser")();
+			if (options.userAgent) this.robots.setUserAgent(options.userAgent);
+			if (options.robotsNeutral == undefined) options.robotsNeutral = true;
+			this.robots.setAllowOnNeutral(options.robotsNeutral);
 			return this;
 		})
 	}
