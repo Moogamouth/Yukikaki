@@ -3,8 +3,7 @@ class Yukikaki {
 	constructor(headless) {
 		return Promise.resolve()
 		.then(async () => {
-			if (headless === undefined) headless = false;
-			this.browser = await require("puppeteer").launch({headless: headless});
+			this.browser = await (require("puppeteer")).launch({headless: headless});
 			this.page = (await this.browser.pages())[0];
 			this.page.setViewport({
 				width: 1200,
@@ -28,14 +27,14 @@ class Yukikaki {
 		if (contentType === "text/html") options.html = options.html ?? true;
 
 		let data = [];
-		const ret = await options.func(options, res, this.page);
+		const ret = options.func(options, res, this.page);
 		if (ret) data.push(ret);
 
 		let arcLinksOrSrcs = options.html == true && options.i > 0;
 
 		if (arcLinksOrSrcs) {
 			var urls = [];
-			this.page.on("request", async (req) => {urls.push(req.url());});
+			this.page.on("request", async (req) => {urls.push(await req.url());});
 		}
 		
 		if (arcLinksOrSrcs) {
@@ -49,10 +48,12 @@ class Yukikaki {
 					data.push(await this.main(options2));
 				}
 			}
-			for (let i = 1; i < urls.length; i++) {
-				let options2 = options;
-				options2.url = urls[i];
-				data.push(await this.main(options2));
+			if (options.srcs) {
+				for (let i = 1; i < urls.length; i++) {
+					let options2 = options;
+					options2.url = urls[i];
+					data.push(await this.main(options2));
+				}
 			}
 		}
 		return data;

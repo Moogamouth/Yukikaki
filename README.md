@@ -1,5 +1,5 @@
 # Yukikaki
-Node.js API that scrapes and crawls webpages.
+Node.js framework that scrapes and crawls webpages.
 
 ## Installation
 Using [npm](https://www.npmjs.com/):
@@ -8,58 +8,84 @@ Using [npm](https://www.npmjs.com/):
 npm install yukikaki
 ```
 
-## Examples
+## Usage
 
+You can import Yukikaki using `require`:
 ```js
 (async () => {
-    const yukikaki = await new (await require("yukikaki"))(false);
-    func = function(res, options) {
-        console.log(await res.buffer(), options.url);
-    }
-    await yukikaki.scrape({url: "https://www.youtube.com/watch?v=jNQXAC9IVRw", func(), i: 1, hrefs: true, after: 1588230344423});
+    const yukikaki = new require("yukikaki");
 })();
 ```
 
-## API
+Or with `import`:
+```js
+(async () => {
+    import Yukikaki from "yukikaki";
+    const yukikaki = new Yukikaki;
+})();
+```
 
-### class Yukikaki(headless)
+You can start Yukikaki in headful mode using the `headless` parameter like so:
+```js
+(async () => {
+    const yukikaki = new require("yukikaki")(false);
+})();
+```
 
-#### headless
-Specifies whether to run the scraper in headless mode.
+Or using `import`:
+```js
+(async () => {
+    import Yukikaki from "yukikaki";
+    const yukikaki = new Yukikaki(false);
+})();
+```
 
-#### .scrape([options])
-Crawls webpage according to options.url.
+### .scrape(options)
+Scrapes data from webpages according to `options`.
 
-##### options.url
+#### options.url
 `String`
-The URL to archive.
 
-##### options.func(res, options, page)
+The URL to start crawling from.
+
+#### options.func(options, res, page)
 `Function`
-The function to run on scraper data. These parameters will be passed into options.func:
 
-###### options
-The options object passed into .scrape().
+`.scrape()` will run `options.func` on every webpage it crawls. `.scrape()` will input the following values into `options.func`:
 
-###### res
+`options`
+
+You can change this value's properties inside of `options.func`, except for `options.func` and `options.url`.
+
+Note: `options.i` will be decremented based on how many links or sources away the page is from the starting page.
+
+`res`
 [`<HTTPResponse>`](https://pptr.dev/api/puppeteer.httpresponse)
-The data that has been scraped from the current page.
 
-###### page
+Puppeteer response from the current page.
+
+`page`
 [`<Page>`](https://pptr.dev/api/puppeteer.page)
-The current page.
 
-#####
-Tip: You can set options.hrefs to false inside options.func to disable scraping for sources and links of the page currently being crawled.
+Puppeteer page of the current page.
 
-##### options.i
+#### options.i
 `Int`
-Optional. Default is 1. Determines when to stop archiving links and sources. If i > 1, options.hrefs will automatically be set to true.
 
-##### options.hrefs
+Optional. Default is 1. Determines when to stop archiving trees of links and sources. If `options.i` > 1, options.hrefs will automatically be set to true.
+
+#### options.hrefs
 `Bool`
-Optional. If true, archive links, links of links, and links of links of links, so on. It will stop when options.i is depleted. Will automatically be set to true if i > 1.
 
-##### options.after
-`Int`
-Optional. A Unix date. Only archive pages that have not been archived after this date.
+Optional. If true, archive links, links of links, so on, stemming from the current page. It will stop when options.i is depleted. Will automatically be set to true if `options.i` > 1.
+
+#### options.srcs
+`Bool`
+
+Optional. If true, archive sources of the current page.
+
+## License
+
+Copyright (c) Moogamouth 2022
+
+[AGPL-3.0](https://choosealicense.com/licenses/agpl-3.0/)
