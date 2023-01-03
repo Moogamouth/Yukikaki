@@ -13,7 +13,7 @@ npm install yukikaki
 You can import Yukikaki using `require`:
 ```js
 (async () => {
-    const yukikaki = new require("yukikaki");
+    const yukikaki = await new require("yukikaki");
 })();
 ```
 
@@ -21,7 +21,7 @@ Or with `import`:
 ```js
 (async () => {
     import Yukikaki from "yukikaki";
-    const yukikaki = new Yukikaki;
+    const yukikaki = await new Yukikaki;
 })();
 ```
 
