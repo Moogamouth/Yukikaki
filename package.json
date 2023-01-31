@@ -1,6 +1,6 @@
 {
   "name": "yukikaki",
-  "version": "0.3.1",
+  "version": "0.3.3",
   "description": "Node.js API that scrapes and crawls webpages.",
   "main": "src/index.js",
   "scripts": {
@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/Moogamouth/Yukikaki#readme",
   "dependencies": {
-    "puppeteer": "^19.4.1",
+    "puppeteer": "^19.6.2",
     "robots-txt-parser": "^2.0.3"
   }
 }

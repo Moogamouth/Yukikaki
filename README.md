@@ -32,19 +32,8 @@ Or with `import`:
 
 Optional. Default is true. If false, starts crawling in headful mode.
 
-#### options.userAgent
-`String`
-
-Optional. Sets the user agent for robots.txt.
-
-#### options.robotsNeutral
-
-`Bool`
-
-Optional. Default is true. Determines whether to crawl pages that are neutral according to robots.txt.
-
 ### .scrape(options)
-Scrapes data from webpages according to `options`.
+Scrapes data from webpages according to `options` and runs `options.func` on every webpage it crawls. You can use these properties or add your own properties for use by `options.func`.
 
 #### options.url
 `String`
@@ -77,20 +66,36 @@ Puppeteer page of the current page.
 
 Optional. Default is 1. Determines when to stop archiving trees of links and sources. If `options.i` > 1, options.hrefs will automatically be set to true.
 
-#### options.hrefs
-`Bool`
-
-Optional. If true, scrape links, links of links, so on, stemming from the current page. It will stop when options.i is depleted. Will automatically be set to true if `options.i` > 1.
-
 #### options.srcs
 `Bool`
 
 Optional. If true, scrape sources of the current page.
 
+### options.hrefs
+`Bool`
+
+Optional. If true, scrape links, links of links, so on, stemming from the current page. It will stop when options.i is depleted. Will automatically be set to true if `options.i` > 1.
+
 #### options.robots
 `Bool`
 
 Optional. If true, only scrape pages in accordance with robots.txt.
+
+#### options.userAgent
+`String`
+
+Optional. The user agent to use for robots.txt.
+
+#### options.robotsNeutral
+
+`Bool`
+
+Optional. Default is true. Crawl pages that are neutral according to robots.txt.
+
+#### options.robotsSrcsHrefs
+`Bool`
+
+Optional. Default is true. Crawl links and sources even if the current page is not compatible with robots.txt.
 
 ## License
 
