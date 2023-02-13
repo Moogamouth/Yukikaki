@@ -69,7 +69,7 @@ Optional. Default is 1. Determines when to stop archiving trees of links and sou
 #### options.srcs
 `Bool`
 
-Optional. If true, scrape sources of the current page.
+Optional. Default is true. Scrape sources of the current page.
 
 ### options.hrefs
 `Bool`
